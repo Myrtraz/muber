@@ -1,7 +1,7 @@
 @extends('template')
 
-@section('title', 'Home')
-@section('back|round', '')
+@section('title', 'Destiny')
+@section('background', '')
 @section('content')
 
 <div class="container pt-4">
