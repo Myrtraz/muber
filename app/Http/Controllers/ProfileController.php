@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Rate;
 use Illuminate\Http\Request;
 
-
-class PlanningController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $plans = Rate::get()->take(3);
-        return view('planning', compact('plans'));
+    public function index()
+    {
+        return view('profile');
     }
 
     /**

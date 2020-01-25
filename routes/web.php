@@ -20,6 +20,8 @@ Route::group(['middleware' =>'auth'], function() {
 	Route::resource('/destiny','DestinyController');
 	Route::resource('/planning', 'PlanningController');
 	Route::resource('/endtravel', 'FinishController');
+	Route::resource('/profile', 'ProfileController');
+	Route::resource('/travel', 'IntravelController');
 });
 
 
