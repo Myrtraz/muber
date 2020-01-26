@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Travel;
+use App\Car;
+use App\CarColor;
+use App\CarBrand;
 
 class TravelController extends Controller
 {
@@ -46,7 +49,10 @@ class TravelController extends Controller
      */
     public function show($id)
     {
-        return view('travel', compact('id'));
+        $travel = Travel::find($id);
+        $car = Car::find($travel->car_id);
+
+        return view('travel', compact('id', 'travel', 'car'));
     }
 
     /**

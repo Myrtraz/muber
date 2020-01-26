@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\Travel;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -45,7 +47,10 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        return view('profile', compact('id'));
+        $travel = Travel::find($id);
+        $car = Car::find($travel->car_id);
+
+        return view('profile', compact('id', 'travel', 'car'));
     }
 
     /**

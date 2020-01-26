@@ -29,12 +29,12 @@
 										<div class="col">
 											<img src="https://4.bp.blogspot.com/-gCZuFxnBWoU/W3se4Ua2-nI/AAAAAAAAP3w/4v6clkd08bYIkndBydaK5DwyZc5zT6pgwCLcBGAs/s1600/1%2BpaB7meRmoY4te-o3.jpg" alt="..." class="rounded-circle mb-2" width="100px" height="100px">
 
-											<img src="https://www.itl.cat/pngfile/big/152-1525065_2019-toyota-corolla-hatchback-specs-and-review-toyota.jpg" alt="..." class="rounded-circle" width="100px" height="100px">
+											<img src="{{ $car->color->img }}" alt="..." class="rounded-circle" width="100px" height="100px">
 										</div>
 										<div class="col">
 											<h3>Pablo</h3>
-											<small class="text-muted h4">Corolla Hatchback/Toyota</small><br>
-											<small class="h4"><b>J3QH45</b></small>
+											<small class="text-muted h4">{{ $car->model->name }}/{{ $car->brand->name }}</small><br>
+											<small class="h4"><b>{{ $car->license_plate }}</b></small>
 										</div>
 										<div class="col">
 											<span class="badge badge-warning float-right">Oro</span>

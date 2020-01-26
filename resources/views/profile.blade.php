@@ -5,6 +5,9 @@
 <section>
 	<div class="container py-4">
 		<div class="row">
+			<div class="col-12 my-2">
+				<a href=" {{ route('travel.show', [ 'travel' => $id ]) }} " class="h3 text-dark text-decoration-none"><i class="fa fa-arrow-left"></i></a>
+			</div>
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
@@ -48,15 +51,15 @@
 						<div class="row">
 							<div class="col mb-3">
 								<p class="h4"><b>Vehiculo</b></p>
-								<img src="https://www.itl.cat/pngfile/big/152-1525065_2019-toyota-corolla-hatchback-specs-and-review-toyota.jpg" alt="..." class="rounded-circle" width="85px" height="80px">
+								<img src="{{ $car->color->img }}" alt="..." class="rounded-circle" width="85px" height="80px">
 							</div>
 							<div class="col mb-3">
 								<p class="h4 mb-4"><b>Modelo/Marca</b></p>
-								<h5>Corolla Hatchback 2019/Toyota</h5>
+								<h5>{{ $car->model->name }}/{{ $car->brand->name }}</h5>
 							</div>
 							<div class="col mb-3">
 								<p class="h4 mb-4"><b>Placa</b></p>
-								<h5>J3QH45</h5>
+								<h5>{{ $car->license_plate }}</h5>
 							</div>
 							<div class="col-12">
 								<form method="post" action="{{ route('travel.destroy', [ 'travel' => $id ]) }}">

@@ -18,32 +18,26 @@ class CarModelSeeder extends Seeder
         $chevrolet = CarBrand::create([ 'name' => 'Chevrolet' ]);
         $toyota = CarBrand::create([ 'name' => 'Toyota' ]);
 
-        $aveo = CarModel::create([
+        $spark = CarModel::create([
             'name' => 'Aveo',
             'brand_id'=> $chevrolet->id
         ]);
 
-        $black_aveo = CarColor::create([
-            'name' => 'Negro',
-            'img' => '',
-            'car_model_id' => $aveo->id
+        CarColor::create([
+            'name' => 'Verde',
+            'img' => 'https://www.primemotorsleasing.com/wp-content/uploads/2018/08/Untitled-1-117-300x300.jpg',
+            'car_model_id' => $spark->id
         ]);
 
-        $white_aveo = CarColor::create([
-            'name' => 'Blanco',
-            'img' => '',
-            'car_model_id' => $aveo->id
-        ]);
-
-        $optra = CarModel::create([
-            'name' => 'Optra',
+        $impala = CarModel::create([
+            'name' => 'Impala',
             'brand_id'=> $chevrolet->id
         ]);
 
-        $white_optra = CarColor::create([
-            'name' => 'Blanco',
-            'img' => '',
-            'car_model_id' => $optra->id
+        CarColor::create([
+            'name' => 'Azul',
+            'img' => 'https://www.primemotorsleasing.com/wp-content/uploads/2018/08/Untitled-1-121-300x300.jpg',
+            'car_model_id' => $impala->id
         ]);
 
         $corolla = CarModel::create([
@@ -51,9 +45,15 @@ class CarModelSeeder extends Seeder
             'brand_id'=> $toyota->id
         ]);
 
-        $white_corolla = CarColor::create([
+        CarColor::create([
             'name' => 'Blanco',
-            'img' => '',
+            'img' => 'https://www.primemotorsleasing.com/wp-content/uploads/2018/08/2016-toyota-corolla-le-lease-deal-new-300x300.jpg',
+            'car_model_id' => $corolla->id
+        ]);
+
+        CarColor::create([
+            'name' => 'Negro',
+            'img' => 'https://www.primemotorsleasing.com/wp-content/uploads/2016/08/2016-Toyota-Corolla-black.png',
             'car_model_id' => $corolla->id
         ]);
 
@@ -63,8 +63,8 @@ class CarModelSeeder extends Seeder
         ]);
 
         $white_prius = CarColor::create([
-            'name' => 'Blanco',
-            'img' => '',
+            'name' => 'Azul',
+            'img' => 'https://www.primemotorsleasing.com/wp-content/uploads/2018/08/2016-toyota-prius-lease-specials-new-300x300.jpg',
             'car_model_id' => $prius->id
         ]);
     }
