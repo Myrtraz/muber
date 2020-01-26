@@ -39,16 +39,20 @@
 						</div>
 						<hr>
 						@endforeach
-						<div class="dropdown mb-3">
-							<button class="btn btn-secondary dropdown-toggle open" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Metodo de Pago
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#"><i class="fa fa-money"></i> Efectivo</a>
-								<a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i> Tarjeta de Crédito</a>
+						<form method="post" action="{{  route('planning.store')  }}">
+							@csrf
+							<input type="hidden" name="rate_id" value="1" />
+							<div class="dropdown mb-3">
+								<button class="btn btn-secondary dropdown-toggle open" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Metodo de Pago
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#"><i class="fa fa-money"></i> Efectivo</a>
+									<a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i> Tarjeta de Crédito</a>
+								</div>
 							</div>
-						</div>
-						<button type="submit" class="btn btn-danger float-right mx-5">Confirmar Viaje</button>
+							<button type="submit" class="btn btn-danger float-right mx-5">Confirmar Viaje</button>
+						</form>
 					</div>
 				</div>
 			</div>

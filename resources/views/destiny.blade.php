@@ -44,7 +44,7 @@
 
 			<div class="list-group p-3 col">
   				<div class="list-group-item">
-  					<a href="#" class="text-dark text-decoration-none">
+  					<a href="{{  route('planning.index') }}" class="text-dark text-decoration-none">
   					<div class="row">
   						<div class="col-2 text-center h2">
 							<i class="fa fa-clock-o"></i>

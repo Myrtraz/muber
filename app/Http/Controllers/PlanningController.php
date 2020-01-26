@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Rate;
 use Illuminate\Http\Request;
-
+use Auth;
+use App\User;
+use App\Travel;
 
 class PlanningController extends Controller
 {
@@ -36,7 +38,21 @@ class PlanningController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $currentUserId = Auth::user()->id;
+        $driver = User::whereNotNull('car_id')->first();
+
+        Travel::create([
+            'user_id' => $currentUserId,
+            'driver_id' => $driver->id,
+            'car_id' => $driver->car_id,
+            'rate_id' => $request->rate_id,
+            'state' => 'created',
+            'payment_method' => 'cc',
+            'distance_in_meters' => 1000,
+            'total' => 10000,
+        ]);
+
+        return redirect()->route('travel.index');
     }
 
     /**
