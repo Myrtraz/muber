@@ -41,7 +41,7 @@ class PlanningController extends Controller
         $currentUserId = Auth::user()->id;
         $driver = User::whereNotNull('car_id')->first();
 
-        Travel::create([
+        $travel = Travel::create([
             'user_id' => $currentUserId,
             'driver_id' => $driver->id,
             'car_id' => $driver->car_id,
@@ -52,7 +52,7 @@ class PlanningController extends Controller
             'total' => 10000,
         ]);
 
-        return redirect()->route('travel.index');
+        return redirect()->route('travel.show', ['id' => $travel->id]);
     }
 
     /**

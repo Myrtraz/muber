@@ -58,7 +58,13 @@
 								<p class="h4 mb-4"><b>Placa</b></p>
 								<h5>J3QH45</h5>
 							</div>
-							<a href="{{route('home.index')}}" class="form-control text-center btn-dark btn-lg btn-block">Cancelar</a>
+							<div class="col-12">
+								<form method="post" action="{{ route('travel.destroy', [ 'travel' => $id ]) }}">
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="form-control text-center btn-dark btn-lg btn-block">Cancelar</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
