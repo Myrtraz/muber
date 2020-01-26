@@ -15,8 +15,9 @@ class CreateCarColorsTable extends Migration
     {
         Schema::create('car_colors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->string('img');
-            $table->string('carmodel_id');
+            $table->integer('car_model_id');
             $table->timestamps();
         });
     }
