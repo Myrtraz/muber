@@ -36,6 +36,10 @@ height: 500px;
 						<form method="post" action="{{  route('planning.store')  }}">
 							@csrf
 							<input type="hidden" name="rate_id" value="1" />
+							<input type="hidden" name="travel" id="travel" value="" />
+
+
+
 							<div class="dropdown mb-3">
 								<button class="btn btn-secondary dropdown-toggle open" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Metodo de Pago
@@ -45,7 +49,7 @@ height: 500px;
 									<a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i> Tarjeta de Crédito</a>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-danger float-right mx-5">Confirmar Viaje</button>
+							<button type="submit" class="btn btn-danger float-right mx-5" id="confirm" disabled="">Confirmar Viaje</button>
 						</form>
 					</div>
 				</div>
@@ -54,6 +58,10 @@ height: 500px;
 	</div>
 </div>
 <script type="text/javascript">
+	const travelInputHtml = document.getElementById("travel")
+	const confirmTravelBnt = document.getElementById("confirm")
+	const travel = {};
+
 	const destinyLat = {{ $lat }};
 	const destinyLng = {{ $lng }};
 
@@ -79,6 +87,11 @@ height: 500px;
 			destination:destiny,
 			travelMode:'WALKING'
 		}
+
+		travel.destinations = [ {lat:coords.latitude, lng:coords.longitude}, {lat:destinyLat, lng:destinyLng} ]
+		travelInputHtml.value = JSON.stringify(travel);
+
+		confirmTravelBnt.disabled = false;
 
 		directionService.route(request, function(result, status) {
 			console.log(status)

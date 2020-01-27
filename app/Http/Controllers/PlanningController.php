@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Travel;
+use App\Destiny;
 
 class PlanningController extends Controller
 {
@@ -56,6 +57,23 @@ class PlanningController extends Controller
             'distance_in_meters' => 1000,
             'total' => 10000,
         ]);
+
+        $requestTravel = json_decode($request->travel);
+
+        $index = 0;
+
+        foreach ($requestTravel->destinations as $destiny) {
+            Destiny::create([
+                'lat' => $destiny->lat,
+                'lng' => $destiny->lng,
+                'travel_id' => $travel->id,
+                'index' => $index,
+            ]);
+            
+            $index++;
+        }
+
+        //Destiny
 
         return redirect()->route('travel.show', ['id' => $travel->id]);
     }
