@@ -94,7 +94,7 @@ height: 500px;
 		confirmTravelBnt.disabled = false;
 
 		directionService.route(request, function(result, status) {
-			console.log(status)
+			console.log(result)
 
 			if (status === "OK") {
 				directionDisplay.setDirections(result)
@@ -104,7 +104,11 @@ height: 500px;
 
 	function loadLocation() {
 		navigator.geolocation.getCurrentPosition(({coords}) => {
+			console.log("coords loaded")
 			initMap(coords)
+		}, () => {
+			console.log("unable to load coords")
+			alert('necesitas darle permisos de ubicacion')
 		})
 	}
 </script>

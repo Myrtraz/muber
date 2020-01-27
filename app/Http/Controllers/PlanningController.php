@@ -47,6 +47,15 @@ class PlanningController extends Controller
         $currentUserId = Auth::user()->id;
         $driver = User::whereNotNull('car_id')->first();
 
+        $requestTravel = json_decode($request->travel);
+
+        $distance_in_meters = $this->calculeDistanceInMetersBetweenPoints(
+            $requestTravel->destinations[0]->lat,
+            $requestTravel->destinations[0]->lng,
+            $requestTravel->destinations[1]->lat,
+            $requestTravel->destinations[1]->lng
+        );
+
         $travel = Travel::create([
             'user_id' => $currentUserId,
             'driver_id' => $driver->id,
@@ -54,11 +63,9 @@ class PlanningController extends Controller
             'rate_id' => $request->rate_id,
             'state' => 'created',
             'payment_method' => 'cc',
-            'distance_in_meters' => 1000,
+            'distance_in_meters' => $distance_in_meters,
             'total' => 10000,
         ]);
-
-        $requestTravel = json_decode($request->travel);
 
         $index = 0;
 
@@ -76,6 +83,30 @@ class PlanningController extends Controller
         //Destiny
 
         return redirect()->route('travel.show', ['id' => $travel->id]);
+    }
+
+    /**
+     * Haversine
+     */
+    function calculeDistanceInMetersBetweenPoints(
+        $latitudeFrom, 
+        $longitudeFrom, 
+        $latitudeTo, 
+        $longitudeTo, 
+        $earthRadius = 6371000
+    ) {
+
+      $latFrom = deg2rad($latitudeFrom);
+      $lonFrom = deg2rad($longitudeFrom);
+      $latTo = deg2rad($latitudeTo);
+      $lonTo = deg2rad($longitudeTo);
+
+      $latDelta = $latTo - $latFrom;
+      $lonDelta = $lonTo - $lonFrom;
+
+      $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+      
+      return $angle * $earthRadius;
     }
 
     /**
