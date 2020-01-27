@@ -10,6 +10,11 @@ use App\Travel;
 
 class PlanningController extends Controller
 {
+    public function planning($lat, $lng, $placeId){
+        $plans = Rate::get()->take(3);
+        return view('planning', compact('plans', 'lat', 'lng'));
+    }
+
     /**
      * Display a listing of the resource.
      *

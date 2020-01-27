@@ -19,6 +19,9 @@ Route::group(['middleware' =>'auth'], function() {
 	Route::resource('/home','HomeController');
 	Route::resource('/destiny','DestinyController');
 	Route::resource('/planning', 'PlanningController');
+
+	Route::get('/planning/{lat}/{lng}/{place_id}', 'PlanningController@planning');
+
 	Route::resource('/endtravel', 'FinishController');
 	Route::resource('/profile', 'ProfileController');
 	Route::resource('/travel', 'TravelController');
