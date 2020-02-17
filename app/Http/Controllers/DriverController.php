@@ -76,14 +76,35 @@ class DriverController extends Controller
     {
         $driver = Auth::user();
 
-        Travel::where([
-            'id' => $id,
-            'state' => Travel::CREATED
-        ])->update([
-            'car_id' => $driver->car_id,
-            'driver_id' => $driver->id,
-            'state' => Travel::PICK
-        ]);
+        $travel = Travel::find($id);
+
+        if ($travel->state == Travel::CREATED) {
+            Travel::whereNull('driver_id')
+                ->where('id', $id)
+                ->update([
+                'car_id' => $driver->car_id,
+                'driver_id' => $driver->id,
+                'state' => Travel::PICK
+            ]);
+        } elseif ($travel->state == Travel::PICK) {
+            Travel::where([
+                    'id' => $id,
+                    'driver_id' => $driver->id
+                ])
+                ->update(['state' => Travel::WAITING]);
+        } elseif ($travel->state == Travel::WAITING) {
+            Travel::where([
+                'id' => $id,
+                'driver_id' => $driver->id
+            ])
+                ->update(['state' => Travel::RUNNING]);
+        } elseif ($travel->state == Travel::RUNNING) {
+            Travel::where([
+                'id' => $id,
+                'driver_id' => $driver->id
+            ])
+                ->update(['state' => Travel::FINISHED]);
+        }
 
         return redirect()->route('driver.index');
     }

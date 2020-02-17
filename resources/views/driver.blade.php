@@ -22,7 +22,18 @@
                 @foreach($currentTravels as $travel)
                     <div class="card">
                         <div class="card-body">
-                            {{ $travel->id }} {{ $travel->state }} {{ $travel->total }}
+                            {{ $travel->id }} {{ $travel->state }} {{ $travel->total }} <br>
+                            @if($travel->state == \App\Travel::PICK)
+                                <a href="{{ route('driver.edit', ['driver' => $travel->id]) }}" class="btn btn-primary">In place</a>
+                            @endif
+
+                            @if($travel->state == \App\Travel::WAITING)
+                                <a href="{{ route('driver.edit', ['driver' => $travel->id]) }}" class="btn btn-info">Start</a>
+                            @endif
+
+                            @if($travel->state == \App\Travel::RUNNING)
+                                <a href="{{ route('driver.edit', ['driver' => $travel->id]) }}" class="btn btn-dark">Finished</a>
+                            @endif
                         </div>
                     </div>
                 @endforeach
