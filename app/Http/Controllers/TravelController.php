@@ -50,6 +50,11 @@ class TravelController extends Controller
     public function show($id)
     {
         $travel = Travel::find($id);
+
+        if ($travel->state == Travel::FINISHED) {
+            return redirect()->route('endtravel.index');
+        }
+
         $car = Car::find($travel->car_id);
 
         return view('travel', compact('id', 'travel', 'car'));
@@ -86,7 +91,7 @@ class TravelController extends Controller
      */
     public function destroy($id)
     {
-        Travel::where('id', $id)->update([ 'state' => 'cancelled' ]);
+        Travel::where('id', $id)->update([ 'state' => Travel::CANCELLED ]);
 
         return redirect()->route('home.index');
     }

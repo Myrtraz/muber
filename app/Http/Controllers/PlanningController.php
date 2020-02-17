@@ -61,7 +61,7 @@ class PlanningController extends Controller
             'driver_id' => $driver->id,
             'car_id' => $driver->car_id,
             'rate_id' => $request->rate_id,
-            'state' => 'created',
+            'state' => Travel::CREATED,
             'payment_method' => 'cc',
             'distance_in_meters' => $distance_in_meters,
             'total' => 10000,
