@@ -39,4 +39,8 @@ class Travel extends Model
         'distance_in_meters',
         'total',
     ];
+
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

@@ -19,7 +19,7 @@ height: 500px;
 					<hr>
 					<div class="from-group mb-3">
 						@foreach($plans as $plan)
-						<div class="row">
+						<div class="row" class="rate" data-rate-id="{{ $plan->id }}">
 							<div class="col-2">
 								<img src="{{ $plan->img }}" alt="" class="rounded-circle" width="94px" height="71px">
 							</div>
@@ -35,10 +35,8 @@ height: 500px;
 						@endforeach
 						<form method="post" action="{{  route('planning.store')  }}">
 							@csrf
-							<input type="hidden" name="rate_id" value="1" />
+							<input type="hidden" name="rate_id" value="{{ $plans[0]->id }}" />
 							<input type="hidden" name="travel" id="travel" value="" />
-
-
 
 							<div class="dropdown mb-3">
 								<button class="btn btn-secondary dropdown-toggle open" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

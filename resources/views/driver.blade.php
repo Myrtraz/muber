@@ -44,7 +44,18 @@
                 @foreach($historyTravels as $travel)
                     <div class="card">
                         <div class="card-body">
-                            {{ $travel->id }} {{ $travel->state }} {{ $travel->total }}
+                            <div class="row">
+                                <div class="col-12">
+                                    #{{ $travel->id }} <span class="badge {{ $travel->state == \App\Travel::FINISHED ? 'badge-success' : 'badge-danger' }}">{{ $travel->state }}</span>
+                                </div>
+                                <div class="col-12">
+                                    <h6>{{ $travel->user->name }}</h6>
+                                    <br>
+                                    <h4><b>Distancia:</b> {{ number_format($travel->distance_in_meters / 1000, 1) }}Km</h4>
+                                    <h3><b>Total:</b> ${{ number_format($travel->total, 2) }}</h3>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 @endforeach
