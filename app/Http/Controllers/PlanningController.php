@@ -45,7 +45,6 @@ class PlanningController extends Controller
     public function store(Request $request)
     {
         $currentUserId = Auth::user()->id;
-        $driver = User::whereNotNull('car_id')->first();
 
         $requestTravel = json_decode($request->travel);
 
@@ -58,8 +57,6 @@ class PlanningController extends Controller
 
         $travel = Travel::create([
             'user_id' => $currentUserId,
-            'driver_id' => $driver->id,
-            'car_id' => $driver->car_id,
             'rate_id' => $request->rate_id,
             'state' => Travel::CREATED,
             'payment_method' => 'cc',

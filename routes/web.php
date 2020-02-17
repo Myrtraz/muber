@@ -16,6 +16,9 @@ Route::resource('/register','RegisterController');
 Route::resource('/login','LoginController');
 
 Route::group(['middleware' =>'auth'], function() {
+
+    Route::resource('/driver','DriverController');
+
 	Route::resource('/home','HomeController');
 	Route::resource('/destiny','DestinyController');
 	Route::resource('/planning', 'PlanningController');

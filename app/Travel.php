@@ -14,6 +14,21 @@ class Travel extends Model
 
     const CANCELLED = 'cancelled';
 
+    static function getInRunningStates(){
+        return [
+            self::PICK,
+            self::WAITING,
+            self::RUNNING
+        ];
+    }
+
+    static function getHistoryStates() {
+        return [
+            self::FINISHED,
+            self::CANCELLED
+        ];
+    }
+
     protected $fillable = [
         'user_id',
         'driver_id',
