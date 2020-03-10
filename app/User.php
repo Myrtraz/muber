@@ -15,6 +15,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    const ACTIVE = 'Online';    //conductor o usuario en sección 'en linea'.
+    const DISABLE = 'Offline';    //conductor o usuario en sección 'desconectado'.
+
     protected $fillable = [
         'name', 'email', 'password', 'phone'
     ];

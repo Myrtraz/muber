@@ -18,6 +18,17 @@ class LoginController extends Controller
         return view('login');
     }
 
+    public function LoginDriver()
+    {
+        return view('Driver.login_Driver');
+    }
+
+    public function Logout()
+    {
+        Auth::logout();
+        return redirect()->to('/loginintothedrivers');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,13 +47,20 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
-
-
         if (! Auth::attempt($request->only(['email', 'password']))) {
             return back()->withErrors(['Invalid Credentials']);
         }
 
         return redirect()->route('home.index');
+    }
+
+    public function F(LoginRequest $request) {
+
+        if (! Auth::attempt($request->only(['email', 'password']))) {
+            return back()->withErrors(['Invalid Credentials']);
+        }
+        return redirect()->route('driver.index');
+
     }
 
     /**

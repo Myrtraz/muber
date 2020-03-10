@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\Drivers;
+use App\Http\Requests\DriverRequest;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,6 +21,30 @@ class RegisterController extends Controller
         return view('register');
     }
 
+    public function RegisterDriver() {
+       return view('Driver.register_Driver');
+    }
+
+    public function F(DriverRequest $request) {
+        //
+        $userDriver = $request->all();
+        $userDriver['password'] = bcrypt($userDriver['password']);
+
+        $driver = User::create($userDriver);
+
+        $car = Car::create([
+            'license_plate' => '',
+            'user_id' => $driver->id,
+            'car_model_id' => '1',
+            'car_brand_id' => '1',
+            'car_color_id' => '1',
+        ]);
+
+        $driver->car_id = $car->id;
+        $driver->save();
+
+        return redirect()->route('driver.index');
+    }
     /**
      * Show the form for creating a new resource.
      *

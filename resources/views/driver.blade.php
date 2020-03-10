@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Finish')
+@section('title', 'View Drivers')
 @section('background','')
 @section('content')
 
@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     #{{ $travel->id }} <span class="badge {{ $travel->state == \App\Travel::FINISHED ? 'badge-success' : 'badge-danger' }}">{{ $travel->state }}</span>
-                                </div>
+                                 </div>
                                 <div class="col-12">
                                     <h6>{{ $travel->user->name }}</h6>
                                     <br>
@@ -60,8 +60,20 @@
                     </div>
                 @endforeach
             </div>
+            <a href="#" class="btn btn-danger">Logout</a>
         </div>
     </div>
+
+    <script type="text/javascript">
+        setInterval(function() {
+            fetch('{{ route('ping') }}')
+            .then(r => r.json())
+            .then(data => {
+                console.log("ping")
+            })
+        }, 30000)
+
+    </script>
 
 
 @endsection

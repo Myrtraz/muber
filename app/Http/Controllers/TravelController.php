@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Travel;
 use App\Car;
-use App\CarColor;
 use App\CarBrand;
+use App\CarColor;
+use App\Travel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class TravelController extends Controller
 {
@@ -51,6 +52,14 @@ class TravelController extends Controller
     {
         $travel = Travel::find($id);
 
+        /*
+        if ($travel->state == Travel::PICK) {
+            return response()->json([
+                'success' => 'yes',
+            ]);
+        }
+        */
+
         if ($travel->state == Travel::FINISHED) {
             return redirect()->route('endtravel.index');
         }
@@ -58,6 +67,11 @@ class TravelController extends Controller
         $car = Car::find($travel->car_id);
 
         return view('travel', compact('id', 'travel', 'car'));
+    }
+
+    public function state($id)
+    {
+        return Travel::find($id);
     }
 
     /**

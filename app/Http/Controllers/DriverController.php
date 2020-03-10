@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Travel;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,28 @@ class DriverController extends Controller
             ->whereIn('state', Travel::getInRunningStates())
             ->get();
 
-        return view('driver', compact('historyTravels', 'currentTravels', 'availableTravels'));
+        return view(
+            'driver', compact('historyTravels', 'currentTravels', 'availableTravels')
+        );
+    }
+
+    public function lastActivity()
+    {
+        $user_id = Auth::user()->id;
+
+        $user = User::find($user_id);
+        $user->last_connection = Carbon::now();
+        $user->save();
+
+        return [];
+    }
+
+    public function activeDrivers() {
+        $time = Carbon::now()->subMinute(2);
+
+        $users = User::where('last_connection', '>=', $time)->get();
+
+        return view('Driver.active_Drivers', compact('users'));
     }
 
     /**
